@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    stream:
+      dynamic-destinations:
+        - test
+        - test2
+      bindings:
+        inputChannel1:
+          destination: test
+          binder: kafka1
+          content-type: text/plain
+          consumer:
+            header-mode: raw 
+        inputChannel2:
+          destination: test
+          binder: kafka1
+          content-type: text/plain
+          consumer:
+            header-mode: raw     
+        outputChannel1:
+          destination: test1
+          binder: kafka1
+          content-type: text/plain
+        outputChannel2:
+          destination: test2
+          binder: kafka1
+          content-type: text/plain
+      binders:
+        kafka1:
+          type: kafka
+          environment:
+            spring:
+              kafka:
+                host: localhost:9092 
