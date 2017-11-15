@@ -1,0 +1,8 @@
+---
+applications:
+- name: restgateway
+  memory: 512M
+  host: restgateway
+  env:
+       JAVA_OPTS: -Dsun.security.krb5.debug=false -Djava.security.krb5.conf=/home/vcap/app/BOOT-INF/classes/static/krb5.conf -Djava.security.auth.login.config=/home/vcap/app/BOOT-INF/classes/static/jaas.conf
+

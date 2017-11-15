@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Profile;
 @ComponentScan(basePackages = {"com.example.demo"})
 public class DynamicDestinationApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DynamicDestinationApplication.class, args);
-	}
+//	public static void main(String[] args) {
+//		SpringApplication.run(DynamicDestinationApplication.class, args);
+//	}
 	
 }

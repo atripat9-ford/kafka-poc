@@ -4,15 +4,20 @@ buildscript {
 	}
 	repositories {
 		mavenCentral()
+		maven {
+	      url "https://plugins.gradle.org/m2/"
+	    }
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("com.commercehub.gradle.plugin:gradle-avro-plugin:0.9.1")
 	}
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
+apply plugin: "com.commercehub.gradle.plugin.avro"
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -27,8 +32,26 @@ ext {
 	springCloudVersion = 'Dalston.SR4'
 }
 
+avro {
+  //  createSetters = false
+//    //fieldVisibility = "PRIVATE"
+    stringType = "CharSequence"
+}
+
+task generateAvro(type: com.commercehub.gradle.plugin.avro.GenerateAvroJavaTask) {
+    source("src/main/resources/avro")
+    outputDir = file("src/main/java/com/example/demo/generated/avro")
+    fieldVisibility = "PRIVATE"
+}
+
 dependencies {
-	compile('org.springframework.cloud:spring-cloud-stream-binder-kafka')
+    compile('org.springframework.cloud:spring-cloud-stream')
+	compile('org.springframework.cloud:spring-cloud-starter-stream-kafka')
+	compile('org.apache.avro:avro:1.8.0')
+	compile('org.springframework:spring-messaging')
+	compile('org.springframework.cloud:spring-cloud-stream-schema')
+	
+	//compile('org.springframework.cloud:spring-cloud-stream-binder-kafka')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
@@ -36,4 +59,7 @@ dependencyManagement {
 	imports {
 		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
 	}
+	//https://www.linkedin.com/pulse/avro-tutorial-rick-hightower
 }
+
+compileJava.source(generateAvro.outputs)
