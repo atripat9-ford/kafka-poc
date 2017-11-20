@@ -29,8 +29,8 @@ public class SinkAndSourceChannelApplication{
 	@Bean
 	public MessageConverter carMessageConverter() throws IOException {
 	      AvroSchemaMessageConverter converter =  new AvroSchemaMessageConverter(MimeType.valueOf(KafkaUtils.MIME_TYPE));
-	      converter.setSchemaLocation(new ClassPathResource("avro/AvroCar.avsc"));
-      
+	     // converter.setSchemaLocation(new ClassPathResource("avro/AvroCar.avsc"));
+	      converter.setSchemaLocation(new ClassPathResource("avro/FPEvent.avsc"));
 		  return converter;
 	}
 	

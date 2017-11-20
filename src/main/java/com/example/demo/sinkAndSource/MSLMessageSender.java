@@ -11,7 +11,7 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.generated.avro.AvroCar;
+import com.example.demo.generated.avro.FPMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
@@ -27,9 +27,9 @@ public class MSLMessageSender {
 	@Autowired
 	ObjectMapper mapper;
 	
-    public void sendCar(Car car, String contentType) {
+    public void sendMessage(BaseFPEvent baseFpEvent, String contentType) {
     	
-    	Message<?> message = buildAvroMessage(car, contentType);    	
+    	Message<?> message = buildAvroMessage(baseFpEvent, contentType);    	
         System.out.println("Sender Car converted to Avro Message: " + message);
         
         byte[] payload = (byte[]) message.getPayload();
@@ -39,19 +39,48 @@ public class MSLMessageSender {
         output.outputChannel2().send(message); 
    }
 
-    private Message<?> buildAvroMessage(Car car, String contentType) {
-    	AvroCar avroCar = AvroCar.newBuilder()
-				.setId(car.getId())
-				.setYear(car.getYear())
-				.setMake(car.getMake())
-				.setModel(car.getModel())
-				.setEngine(car.getEngine())
+   
+    
+    private Message<?> buildAvroMessage(BaseFPEvent baseFPEvent, String contentType) {
+    	FPMessage fpMessage = FPMessage.newBuilder()
+				.setEventType(baseFPEvent.getEventType())
+				.setEventId(baseFPEvent.getEventId())
+				.setUserGuid(baseFPEvent.getUserGuid())
+				.setOriginator(baseFPEvent.getOriginator())
+				.setPublisher(baseFPEvent.getPublisher())
+				.setVin(baseFPEvent.getVin())
+				.setOriginationTimestamp(baseFPEvent.getOriginationTimestamp())
 				.build();
     	Map<String,Object> map = new HashMap<>();
     	map.put(MessageHeaders.CONTENT_TYPE, contentType);
-    	return converter.toMessage(avroCar, new MessageHeaders(map));
+    	return converter.toMessage(fpMessage, new MessageHeaders(map));
     }
     
+    
+    
+//    public void sendCar(Car car, String contentType) {
+//    	
+//    	Message<?> message = buildAvroMessage(car, contentType);    	
+//        System.out.println("Sender Car converted to Avro Message: " + message);
+//        
+//        byte[] payload = (byte[]) message.getPayload();
+//        System.out.println(" Sender payload sent: "+payload);
+//        
+//        output.outputChannel1().send(message); 
+//        output.outputChannel2().send(message); 
+//   }
+//    private Message<?> buildAvroMessage(Car car, String contentType) {
+//    	AvroCar avroCar = AvroCar.newBuilder()
+//				.setId(car.getId())
+//				.setYear(car.getYear())
+//				.setMake(car.getMake())
+//				.setModel(car.getModel())
+//				.setEngine(car.getEngine())
+//				.build();
+//    	Map<String,Object> map = new HashMap<>();
+//    	map.put(MessageHeaders.CONTENT_TYPE, contentType);
+//    	return converter.toMessage(avroCar, new MessageHeaders(map));
+//    }
 //   private Message<?> buildAvroMessage(Car car, String contentType) {
 //	   AvroCar avroCar = AvroCar.newBuilder()
 //    							.setId(car.getId())

@@ -1,5 +1,7 @@
 package com.example.demo.sinkAndSource;
 
+import java.time.Instant;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,13 +23,14 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/sendMessage")
-	public String sendMessage(@RequestParam("engine") String engine) throws JsonProcessingException {
-		System.out.println("Received request to send message "+engine);
+	public String sendMessage(@RequestParam("inputParam") String userGUID) throws JsonProcessingException {
+		System.out.println("Received request to send message "+userGUID);
 		
-		Car car = new Car("2017", "ford", "mustang", engine);
-	    mslMessageSender.sendCar(car, KafkaUtils.MIME_TYPE);
+		BaseFPEvent baseFPEvent = new BaseFPEvent("ServiceDue","1234",userGUID,"9BFZH55L0J8457996","E4281A6E-34C3-11E7-B6EC-000D3A196736","MSL-APPID",Instant.now().toString() );
+		mslMessageSender.sendMessage(baseFPEvent, KafkaUtils.MIME_TYPE);
+		//mslMessageSender.sendCar(car, KafkaUtils.MIME_TYPE);
 	    //mslJSONMessageSender.sendCar(car, KafkaUtils.MIME_TYPE);
 		
-		return "Send engine as "+engine;
+		return "Sent userGuid as "+userGUID;
 	}
 }

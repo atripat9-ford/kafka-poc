@@ -152,8 +152,8 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
    * Creates a new AvroCar RecordBuilder.
    * @return A new AvroCar RecordBuilder
    */
-  public static com.example.demo.generated.avro.AvroCar.Builder newBuilder() {
-    return new com.example.demo.generated.avro.AvroCar.Builder();
+  public static Builder newBuilder() {
+    return new AvroCar.Builder();
   }
 
   /**
@@ -161,8 +161,8 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
    * @param other The existing builder to copy.
    * @return A new AvroCar RecordBuilder
    */
-  public static com.example.demo.generated.avro.AvroCar.Builder newBuilder(com.example.demo.generated.avro.AvroCar.Builder other) {
-    return new com.example.demo.generated.avro.AvroCar.Builder(other);
+  public static Builder newBuilder(Builder other) {
+    return new AvroCar.Builder(other);
   }
 
   /**
@@ -170,8 +170,8 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
    * @param other The existing instance to copy.
    * @return A new AvroCar RecordBuilder
    */
-  public static com.example.demo.generated.avro.AvroCar.Builder newBuilder(com.example.demo.generated.avro.AvroCar other) {
-    return new com.example.demo.generated.avro.AvroCar.Builder(other);
+  public static Builder newBuilder(com.example.demo.generated.avro.AvroCar other) {
+    return new AvroCar.Builder(other);
   }
 
   /**
@@ -195,7 +195,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(com.example.demo.generated.avro.AvroCar.Builder other) {
+    private Builder(Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.id)) {
         this.id = data().deepCopy(fields()[0].schema(), other.id);
@@ -260,7 +260,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'id'.
       * @return This builder.
       */
-    public com.example.demo.generated.avro.AvroCar.Builder setId(int value) {
+    public Builder setId(int value) {
       validate(fields()[0], value);
       this.id = value;
       fieldSetFlags()[0] = true;
@@ -280,7 +280,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
       * Clears the value of the 'id' field.
       * @return This builder.
       */
-    public com.example.demo.generated.avro.AvroCar.Builder clearId() {
+    public Builder clearId() {
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -298,7 +298,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'year'.
       * @return This builder.
       */
-    public com.example.demo.generated.avro.AvroCar.Builder setYear(java.lang.CharSequence value) {
+    public Builder setYear(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.year = value;
       fieldSetFlags()[1] = true;
@@ -318,7 +318,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
       * Clears the value of the 'year' field.
       * @return This builder.
       */
-    public com.example.demo.generated.avro.AvroCar.Builder clearYear() {
+    public Builder clearYear() {
       year = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -337,7 +337,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'make'.
       * @return This builder.
       */
-    public com.example.demo.generated.avro.AvroCar.Builder setMake(java.lang.CharSequence value) {
+    public Builder setMake(java.lang.CharSequence value) {
       validate(fields()[2], value);
       this.make = value;
       fieldSetFlags()[2] = true;
@@ -357,7 +357,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
       * Clears the value of the 'make' field.
       * @return This builder.
       */
-    public com.example.demo.generated.avro.AvroCar.Builder clearMake() {
+    public Builder clearMake() {
       make = null;
       fieldSetFlags()[2] = false;
       return this;
@@ -376,7 +376,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'model'.
       * @return This builder.
       */
-    public com.example.demo.generated.avro.AvroCar.Builder setModel(java.lang.CharSequence value) {
+    public Builder setModel(java.lang.CharSequence value) {
       validate(fields()[3], value);
       this.model = value;
       fieldSetFlags()[3] = true;
@@ -396,7 +396,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
       * Clears the value of the 'model' field.
       * @return This builder.
       */
-    public com.example.demo.generated.avro.AvroCar.Builder clearModel() {
+    public Builder clearModel() {
       model = null;
       fieldSetFlags()[3] = false;
       return this;
@@ -415,7 +415,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
       * @param value The value of 'engine'.
       * @return This builder.
       */
-    public com.example.demo.generated.avro.AvroCar.Builder setEngine(java.lang.CharSequence value) {
+    public Builder setEngine(java.lang.CharSequence value) {
       validate(fields()[4], value);
       this.engine = value;
       fieldSetFlags()[4] = true;
@@ -435,7 +435,7 @@ public class AvroCar extends org.apache.avro.specific.SpecificRecordBase impleme
       * Clears the value of the 'engine' field.
       * @return This builder.
       */
-    public com.example.demo.generated.avro.AvroCar.Builder clearEngine() {
+    public Builder clearEngine() {
       engine = null;
       fieldSetFlags()[4] = false;
       return this;
